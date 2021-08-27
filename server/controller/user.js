@@ -20,9 +20,16 @@ module.exports = (app) => {
     }
   });
 
-  app.get("/user", (req, res) => {
-    res.json({
-      user: "Emil",
-    });
+  app.get("/user", async (req, res) => {
+    try {
+      const users = await User.findAll();
+      if (!users) {
+        throw new Error("no users provided!");
+      }
+
+      res.json(users);
+    } catch (err) {
+      res.status(500).json(err.message);
+    }
   });
 };
