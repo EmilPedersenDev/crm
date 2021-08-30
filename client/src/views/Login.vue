@@ -1,27 +1,63 @@
 <template>
   <div class="login">
     <div class="login__card-wrapper">
-      <div class="login__header">
-        <img src="@/assets/avatar.svg" alt="avatar" />
-        <h1>Login</h1>
-      </div>
-      <div class="login__body">
-        <div class="form-group">
-          <label for="ssn">Social Number</label>
-          <crm-input id="ssn" placeholder="YYYYMMDDXXXX" />
+      <form @submit.prevent="submit">
+        <div class="login__header">
+          <img src="@/assets/avatar.svg" alt="avatar" />
+          <h1>Login</h1>
         </div>
-        <div class="login__btn-wrapper">
-          <crm-button> Submit </crm-button>
+        <div class="login__body">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <crm-input
+              id="email"
+              placeholder="Email..."
+              v-model="model.email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <crm-input
+              id="password"
+              placeholder="Password..."
+              v-model="model.password"
+            />
+          </div>
+          <div class="login__btn-wrapper">
+            <crm-button type="submit"> Submit </crm-button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { mapActions, mapMutations } from "vuex";
+import LoginType from "../service/interfaces/LoginType";
+import Cookies from "js-cookie";
+
 export default Vue.extend({
   name: "Login",
+  data() {
+    return {
+      model: <LoginType>{},
+    };
+  },
+  methods: {
+    ...mapActions(["login"]),
+    ...mapMutations(["setToken"]),
+    async submit() {
+      try {
+        await this.login(this.model);
+        this.setToken(Cookies.get("access_token"));
+        this.$router.push("/home");
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  },
 });
 </script>
 

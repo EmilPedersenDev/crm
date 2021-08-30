@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home content">
     <h1>Home</h1>
   </div>
 </template>
@@ -12,3 +12,8 @@ export default {
   components: {},
 };
 </script>
+<style lang="scss" scoped>
+.home {
+  position: relative;
+}
+</style>

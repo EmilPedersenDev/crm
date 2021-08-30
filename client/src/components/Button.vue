@@ -1,5 +1,10 @@
 <template>
-  <button class="btn btn-outline-primary" @click="onHandleClick" :id="id">
+  <button
+    class="btn btn-outline-primary"
+    :type="type"
+    @click="onHandleClick"
+    :id="id"
+  >
     <slot>Click</slot>
   </button>
 </template>
@@ -13,10 +18,18 @@ export default Vue.extend({
       type: String,
       default: "",
     },
+    type: {
+      type: String,
+      default: "button",
+      validator: (value) => {
+        return ["button", "submit", "reset"].includes(value);
+      },
+    },
   },
   methods: {
-    onHandleClick() {
-      this.$emit("click");
+    onHandleClick(e: any) {
+      if (this.type === "submit" || this.type === "reset") return;
+      this.$emit("click", e);
     },
   },
 });
