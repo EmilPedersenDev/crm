@@ -51,7 +51,14 @@ export default Vue.extend({
     async submit() {
       try {
         await this.login(this.model);
-        this.setToken(Cookies.get("access_token"));
+
+        const token = Cookies.get("access_token");
+        console.log(token);
+
+        if (!token) {
+          throw new Error("No token provided.");
+        }
+        this.setToken(token);
         this.$router.push("/home");
       } catch (err) {
         console.error(err);
