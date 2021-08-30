@@ -46,16 +46,16 @@ const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  console.log(store.getters.isAuthenticated);
+// router.beforeEach((to, from, next) => {
+//   console.log(store.getters.isAuthenticated);
 
-  if (
-    to.matched.some((record) => record.meta.requiresAuth) &&
-    !store.getters.isAuthenticated
-  ) {
-    next({ name: "Login" });
-  } else {
-    next();
-  }
-});
+//   if (
+//     to.matched.some((record) => record.meta.requiresAuth) &&
+//     !store.getters.isAuthenticated
+//   ) {
+//     next({ name: "Login" });
+//   } else {
+//     next();
+//   }
+// });
 export default router;
