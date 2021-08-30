@@ -24,7 +24,7 @@ interface Login {
 
 export default new Vuex.Store({
   state: {
-    token: Cookies.get("access_token") || "",
+    token: localStorage.getItem("jwt") || "",
     user: <User>{},
   },
   actions: {
