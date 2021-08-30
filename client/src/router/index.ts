@@ -26,13 +26,13 @@ const routes: Array<RouteConfig> = [
     path: "/login",
     name: "Login",
     component: () => import("../views/Login.vue"),
-    beforeEnter: (to, from, next) => {
-      if (!store.getters.isAuthenticated) {
-        next();
-      } else {
-        next("/");
-      }
-    },
+    // beforeEnter: (to, from, next) => {
+    //   if (!store.getters.isAuthenticated) {
+    //     next();
+    //   } else {
+    //     next("/");
+    //   }
+    // },
   },
   {
     path: "/account",
