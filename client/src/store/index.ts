@@ -30,30 +30,27 @@ export default new Vuex.Store({
   actions: {
     login: async ({ commit }, payload: Login) => {
       try {
-        const { data } = await api.post("/auth/login", payload, {
-          withCredentials: true,
-        });
+        const { data } = await api.post("/auth/login", payload);
 
-        commit("setUser", data);
+        commit("setUser", data.user);
+        commit("setToken", data.token);
       } catch (err) {
         throw err;
       }
     },
     logout: async ({ commit }) => {
-      try {
-        await api.get("/auth/logout");
-        Cookies.remove("access_token");
-        commit("setToken", "");
-      } catch (err) {
-        throw err;
-      }
+      localStorage.removeItem("jwt");
+      commit("setToken", "");
+      commit("setUser", {});
     },
     getUser: async ({ commit, state }) => {
       try {
         const token: any = jwtDecode(state.token);
 
         const { data } = await api.get(`/user/${token.id}`, {
-          withCredentials: true,
+          headers: {
+            Authentication: state.token,
+          },
         });
 
         if (!data) {
@@ -71,6 +68,9 @@ export default new Vuex.Store({
       state.user = { ...payload };
     },
     setToken: (state, payload) => {
+      if (payload) {
+        localStorage.setItem("jwt", payload);
+      }
       state.token = payload;
     },
   },

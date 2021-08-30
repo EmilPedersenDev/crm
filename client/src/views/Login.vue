@@ -36,7 +36,6 @@
 import Vue from "vue";
 import { mapActions, mapMutations } from "vuex";
 import LoginType from "../service/interfaces/LoginType";
-import Cookies from "js-cookie";
 
 export default Vue.extend({
   name: "Login",
@@ -51,15 +50,9 @@ export default Vue.extend({
     async submit() {
       try {
         await this.login(this.model);
-
-        const token = Cookies.get("access_token");
-        console.log(token);
-
-        if (!token) {
-          throw new Error("No token provided.");
-        }
-        this.setToken(token);
-        this.$router.push("/home");
+        this.$router.push("/home").catch((err) => {
+          console.error(err);
+        });
       } catch (err) {
         console.error(err);
       }
