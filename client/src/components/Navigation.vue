@@ -29,6 +29,7 @@ export default {
   methods: {
     ...mapActions(["logout"]),
     loginUser() {
+      this.$router.push("/login");
       console.log("login");
     },
     async logoutUser() {
