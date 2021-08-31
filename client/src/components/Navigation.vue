@@ -11,6 +11,12 @@
       <li v-if="isAuthenticated">
         <router-link to="/account">Account</router-link>
       </li>
+      <li v-if="isAuthenticated">
+        <router-link to="/company">Company</router-link>
+      </li>
+      <li v-if="isAuthenticated">
+        <router-link to="/contacts">Contacts</router-link>
+      </li>
       <li>
         <crm-button v-if="!isAuthenticated" @click="loginUser">
           Login</crm-button

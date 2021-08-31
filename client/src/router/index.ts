@@ -40,6 +40,18 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Account.vue"),
     meta: { requiresAuth: true },
   },
+  {
+    path: "/company",
+    name: "Company",
+    component: () => import("../views/Company.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/contacts",
+    name: "Contacts",
+    component: () => import("../views/Contacts.vue"),
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({

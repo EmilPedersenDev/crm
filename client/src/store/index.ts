@@ -3,24 +3,9 @@ import Vuex from "vuex";
 import api from "../service/api";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
-// import UserModel from "../service/models/User";
+import { Login, User } from "../service/interfaces/index";
 
 Vue.use(Vuex);
-
-interface User {
-  id?: number;
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  personalNumber?: number;
-  password?: string;
-  role?: string;
-}
-
-interface Login {
-  email: string;
-  password: string;
-}
 
 export default new Vuex.Store({
   state: {

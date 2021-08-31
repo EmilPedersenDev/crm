@@ -35,7 +35,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapActions, mapMutations } from "vuex";
-import LoginType from "../service/interfaces/LoginType";
+import { Login as LoginType } from "../service/interfaces";
 
 export default Vue.extend({
   name: "Login",
