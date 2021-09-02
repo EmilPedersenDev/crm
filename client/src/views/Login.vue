@@ -24,7 +24,7 @@
             />
           </div>
           <div class="login__btn-wrapper">
-            <crm-button type="submit"> Submit </crm-button>
+            <crm-button type="submit" id="login-btn"> Submit </crm-button>
           </div>
         </div>
       </form>
@@ -50,7 +50,7 @@ export default Vue.extend({
     async submit() {
       try {
         await this.login(this.model);
-        this.$router.push("/home").catch((err) => {
+        this.$router.push("/").catch((err) => {
           console.error(err);
         });
       } catch (err) {
